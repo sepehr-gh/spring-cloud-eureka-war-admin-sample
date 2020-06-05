@@ -1,0 +1,35 @@
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+    service-url:
+      defaultZone: ${EUREKA_URI:http://127.0.0.1:8761/eureka}
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+    ip-address: 127.0.0.1
+    metadata-map:
+      startup: ${random.int}    #needed to trigger info and endpoint update after restart
+spring:
+  boot:
+    admin:
+      ui:
+        public-url: http://localhost:8081/
+  security:
+    user:
+      name: admin
+      password: admin-password
+      roles: ACTUATOR, APP, USER
+  application:
+    name: spring-boot-admin
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+server:
+  port: 8081
+logging:
+  level.: debug

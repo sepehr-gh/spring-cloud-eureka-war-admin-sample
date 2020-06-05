@@ -1,0 +1,52 @@
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+    service-url:
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
+  instance:
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+#      management.context-path: /service1/actuator
+      management.port: 8080
+      contextPath: /service1
+    prefer-ip-address: true
+    hostname: localhost
+    ip-address: 127.0.0.1
+    instance-id: ${spring.application.name}
+server:
+  port: 8080
+  servlet:
+    context-path: /service1
+info:
+  app:
+    description: Sepehr Demo Service (info-decsription)
+    java:
+      version: 1.8
+    name: Demo Service (info-name)
+    version: 1.0.0
+  tags:
+    environment: Demo Service (info-environment)
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      cors:
+        allowed-origins: '*'
+      exposure:
+        include: '*'
+spring:
+  boot:
+    admin:
+      client:
+        instance:
+          name: ${spring.application.name}
+  security:
+    user:
+      name: user
+      password: password
+      roles: APP, USER, ACTUATOR
+  application:
+    name: service-1
